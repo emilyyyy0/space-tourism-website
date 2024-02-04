@@ -431,6 +431,44 @@ select {
     background-color: hsl( var(--clr-white) / 1); 
 }
 
+.number-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    
+}
+
+.number-indicators > * {
+    cursor: pointer;
+    border: 0;
+    border-radius: 50%;
+    border-style: solid; /* This defines the border as solid */
+    border-width: 2px; /* This sets the width of the border. Adjust as needed */
+    border-radius: 50%;
+    border-color: hsl(var(--clr-white));
+    width: 3em;
+    height: 3em;
+    padding: .5em;
+    background-color: hsl( var(--clr-dark));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.number-indicators > *:hover, 
+.number-indicators > *:focus {
+    background-color: hsl( var(--clr-white));
+}
+
+.number-indicators > [aria-selected="true"] {
+    background-color: hsl( var(--clr-white) / 1); 
+    color: hsl(var(--clr-dark));
+}
+
+
+
 
 /* ----------------------------- */
 /* Page specific background      */
@@ -506,13 +544,14 @@ body {
     padding-bottom: 4rem;
 }
 
-.grid-container p:not([class]) {
+.grid-container p:not([class]) { /* p selector chooses any paragraph that does not have a class applied to it */
     max-width: 50ch;
 }
 
 .numbered-title {
     grid-area: title;
-}
+} /* assume it is always living in the grid */
+
 
 /* destination layout */
 
@@ -544,7 +583,8 @@ body {
     border-top: 1px solid hsl( var(--clr-white) / .1);
     padding-top: 2.5rem;
     margin-top: 2.5rem;
-}
+} /* not in the grid */
+
 
 .destination-meta p {
     font-size: 1.75rem;
@@ -581,7 +621,7 @@ body {
 
 @media (min-width: 35em) {
     .numbered-title {
-        justify-self: start;
+        justify-self: start; /* because we are using grid */
         margin-top: 2rem;
     }
     
@@ -624,19 +664,19 @@ body {
     
     .grid-container--destination {
         justify-items: start;
-        align-content: start;
+        align-content: start; /* On larger screen, keeps content at the top */
         grid-template-areas: 
             '. title title .'
             '. image tabs .'
             '. image content .';
-    }
+    } /* The dot is like an empty area */
     
     .grid-container--destination > picture {
         max-width: 90%;
     }
      
     .destination-meta {
-        --gap: min(6vw, 6rem);
+        --gap: min(6vw, 6rem); /* Choose whichever is smaller */
         justify-content: start;
     }
     
@@ -655,4 +695,16 @@ body {
         max-width: 90%;
     }
 
+}
+
+
+/* Technology layout */
+
+.grid-container--technology {
+    --flow-space: 2rem;
+    grid-template-areas: 
+        'title'
+        'image'
+        'tabs'
+        'content';
 }
